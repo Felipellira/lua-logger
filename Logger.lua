@@ -45,7 +45,6 @@ function Logger:_generateLogMessage(level, message)
     date = os.date('%Y-%m-%d %H:%M:%S')
   else
     local year, month, day, hour, minute, second = GetLocalTime()
-    print(year, month, day, hour, minute, second)
     date = string.format("%04d-%02d-%02d %02d:%02d:%02d", year, month, day, hour, minute, second)
   end
   local levelName = self.loggerLevelNames[level]

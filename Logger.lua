@@ -40,7 +40,13 @@ function Logger:_generateLogLevelNames()
 end
 
 function Logger:_generateLogMessage(level, message)
-  local date = os.date('%Y-%m-%d %H:%M:%S')
+  local date
+  if IsDuplicityVersion() then
+    date = os.date('%Y-%m-%d %H:%M:%S')
+  else
+    local year, month, day, hour, minute, second = GetLocalTime()
+    date = string.format("%04d-%02d-%02d %02d:%02d:%02d", year, month, day, hour, minute, second)
+  end
   local levelName = self.loggerLevelNames[level]
   local logMessage = string.format("%s [%s] [%s] %s", date, levelName, self.moduleName, message)
   return logMessage
